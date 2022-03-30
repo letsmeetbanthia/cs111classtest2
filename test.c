@@ -23,7 +23,7 @@ void split(int *arr, int size)
     //indices of stor_big array which stores are from 0 to tmp-1
     store_big[0]=big;
 
-    for(int i=0;i<tmp-1;i++)
+    for(int i=0;i<tmp;i++)
     {
         printf("%d ",store_big[i]);
     }
