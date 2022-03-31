@@ -1,10 +1,11 @@
 // HELLO!!😀
 #include <stdio.h>
+#include <stdlib.h>
 
 void split(int *arr, int size)
 {
     int big = 0;
-    int store_big[size];
+    int *store_big=malloc(size*sizeof(int));
     int tmp = 1;
     for (int i = 1; i < size; i++)
     {
@@ -21,6 +22,7 @@ void split(int *arr, int size)
     }
     // store_big array stores all indices having biggest number of array
     // indices of stor_big array which stores are from 0 to tmp-1
+    store_big = realloc(store_big,tmp*sizeof(int));
     store_big[0] = big;
     int less;
     int store_less_big[size];
@@ -68,6 +70,7 @@ void split(int *arr, int size)
         var++;
         counter++;
     }
+    free(store_big);
     for(i=0;i<=size-1+counter;i++)
     {
         printf("%d ",arr[i]);
