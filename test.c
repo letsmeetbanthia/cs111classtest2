@@ -71,7 +71,7 @@ void split(int *arr, int size)
         counter++;
     }
     free(store_big);
-    for(i=0;i<=size-1+counter;i++)
+    for(i=0;i<size+tmp;i++)
     {
         printf("%d ",arr[i]);
     }
