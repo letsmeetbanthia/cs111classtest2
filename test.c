@@ -4,118 +4,119 @@
 
 void split(int *arr, int size)
 {
-    //this array stores indices of biggest numbers in arr
-    //if biggest number occures multiple times
-    int *store_big=malloc(size*sizeof(int));
+    // this array stores indices of biggest numbers in arr
+    // if biggest number occures multiple times
+    int *highest_num_indices = malloc(size * sizeof(int));
 
-    //big stores index of very first biggest number index
-    int big = 0;
+    // highest_index stores index of very first biggest number index
+    int highest_index = 0;
 
     int tmp = 1;
-    //storing indices in store_big array
+    // storing indices in highest_num_indices array
+
     for (int i = 1; i < size; i++)
     {
-        if (arr[i] > arr[big])
+        if (arr[i] > arr[highest_index])
         {
-            big = i;
+            highest_index = i;
             tmp = 1;
         }
-        else if (arr[i] == arr[big])
+        else if (arr[i] == arr[highest_index])
         {
-            store_big[tmp] = i;
+            highest_num_indices[tmp] = i;
             tmp++;
         }
     }
-    store_big[0] = big;
+    highest_num_indices[0] = highest_index;
 
-    // store_big array stores all indices having biggest number of array
+    // highest_num_indices array stores all indices having biggest number of array
     // indices of stor_big array which stores are from 0 to tmp-1
-    store_big = realloc(store_big,tmp*sizeof(int));
+    highest_num_indices = realloc(highest_num_indices, tmp * sizeof(int));
 
-    //less stores index of second highest number in an array
-    int less;
+    // second_highest_index stores index of second highest_index number in an array
+    int second_highest_index;
 
-    //this array stores diff of each element of array and biggest number
-    int store_less_big[size];
+    // this array stores diff of each element of array and biggest number
+    int diff[size];
 
-    //storing difference
+    // storing difference
     for (int i = 0; i < size; i++)
     {
-        store_less_big[i] = arr[big] - arr[i];
+        diff[i] = arr[highest_index] - arr[i];
     }
 
-    int check =0;
-    //findinf the very first number in array which is not highest number
-    //and storing in 'less'
+    int check = 0;
+    // findinf the very first number in array which is not highest_index number
+    // and storing in 'second_highest_index'
     for (int i = 0; i < size; i++)
     {
-        if (store_less_big[i] == 0)
+        if (diff[i] == 0)
         {
-            check=1;
+            check = 1;
             continue;
         }
         else
         {
-            check=0;
-            less = i;
+            check = 0;
+            second_highest_index = i;
             break;
         }
     }
 
-    //checking whether all elements are same or not
-    //if all are same, there is no second highrst number
-    //thus no splitting should occur
-    //check equals 1 means it never encounterd break in above for loop
-    if(check==1)
+    // checking whether all elements are same or not
+    // if all are same, there is no second highrst number
+    // thus no splitting should occur
+    // check equals 1 means it never encounterd break in above for loop
+    if (check == 1)
     {
-        for(int i=0;i<size;i++)
+        for (int i = 0; i < size; i++)
         {
-            printf("%d ",arr[i]);
+            printf("%d ", arr[i]);
         }
         return;
     }
 
-    //finding index of (very first) second highest number
+    // finding index of (very first) second highest_index number
     for (int i = 0; i < size; i++)
     {
-        if (store_less_big[i] == 0)
+        if (diff[i] == 0)
         {
             continue;
         }
-        else if (store_less_big[i] < store_less_big[less])
+        else if (diff[i] < diff[second_highest_index])
         {
-            less = i;
+            second_highest_index = i;
         }
     }
 
-    int counter = 0;
+    check = 0;
     int var = 0;
     int i;
 
-    int second_highest = arr[less];
-    int extra = arr[big]-arr[less];
+    int second_highest = arr[second_highest_index];
+    int extra = arr[highest_index] - arr[second_highest_index];
 
-    //splitting the array
-    //by creating space and storing extra in created space
+    // splitting the array
+    // by creating space and storing extra in created space
     while (var < tmp)
     {
-        for (i = size - 1 + counter; i >= store_big[var] + 1 + counter; i--)
+        for (i = size - 1 + check; i >= highest_num_indices[var] + 1 + check; i--)
         {
             arr[i + 1] = arr[i];
         }
         arr[i] = second_highest;
-        arr[i+1] = extra;
+        arr[i + 1] = extra;
         var++;
-        counter++;
+        check++;
     }
 
-    //free allocated space
-    free(store_big);
+    // free allocated space
+    free(highest_num_indices);
 
-    //printing resultant array
-    for(i=0;i<size+tmp;i++)
+    // printing resultant array
+    for (i = 0; i < size + tmp; i++)
     {
-        printf("%d ",arr[i]);
+        printf("%d ", arr[i]);
     }
 }
 
@@ -124,13 +125,13 @@ int main(void)
 {
     // input size
     int size;
-    //size must be positive number 
+    // size must be positive number
     do
     {
-    printf("Enter the size of array : ");
-    scanf("%d", &size);
-    getchar();
-    }while(size<=0);
+        printf("Enter the size of array : ");
+        scanf("%d", &size);
+        getchar();
+    } while (size <= 0);
 
     int arr[size * 2 - 1];
 
