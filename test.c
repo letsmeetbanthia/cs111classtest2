@@ -40,18 +40,38 @@ void split(int *arr, int size)
             break;
         }
     }
-    for(int i=0;i<size;i++)
+    for (int i = 0; i < size; i++)
     {
         if (store_less_big[i] == 0)
         {
             continue;
         }
-        else if(store_less_big[i]<store_less_big[less])
+        else if (store_less_big[i] < store_less_big[less])
         {
             less = i;
         }
     }
-    printf("%d",arr[less]);
+
+    int counter = 0;
+    int var = 0;
+    int i;
+    int second_highest = arr[less];
+    int extra = arr[big]-arr[less];
+    while (var < tmp)
+    {
+        for (i = size - 1 + counter; i >= store_big[var] + 1 + counter; i--)
+        {
+            arr[i + 1] = arr[i];
+        }
+        arr[i] = second_highest;
+        arr[i+1] = extra;
+        var++;
+        counter++;
+    }
+    for(i=0;i<=size-1+counter;i++)
+    {
+        printf("%d ",arr[i]);
+    }
 }
 
 int main(void)
