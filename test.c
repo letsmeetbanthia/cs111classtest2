@@ -24,23 +24,35 @@ void split(int *arr, int size)
     // indices of stor_big array which stores are from 0 to tmp-1
     store_big = realloc(store_big,tmp*sizeof(int));
     store_big[0] = big;
+
     int less;
     int store_less_big[size];
     for (int i = 0; i < size; i++)
     {
         store_less_big[i] = arr[big] - arr[i];
     }
+    int check =0;
     for (int i = 0; i < size; i++)
     {
         if (store_less_big[i] == 0)
         {
+            check=1;
             continue;
         }
         else
         {
+            check=0;
             less = i;
             break;
         }
+    }
+    if(check==1)
+    {
+        for(int i=0;i<size;i++)
+        {
+            printf("%d ",arr[i]);
+        }
+        return;
     }
     for (int i = 0; i < size; i++)
     {
