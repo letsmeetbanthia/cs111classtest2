@@ -1,6 +1,5 @@
 // HELLO!!😀
 #include <stdio.h>
-#include <stdlib.h>
 
 void split(int *arr, int size)
 {
