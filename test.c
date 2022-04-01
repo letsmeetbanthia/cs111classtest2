@@ -6,7 +6,7 @@ void split(int *arr, int size)
 {
     // this array stores indices of biggest numbers in arr
     // if biggest number occures multiple times
-    int *highest_num_indices = malloc(size * sizeof(int));
+    int highest_num_indices[size];
 
     // highest_index stores index of very first biggest number index
     int highest_index = 0;
@@ -30,8 +30,7 @@ void split(int *arr, int size)
     highest_num_indices[0] = highest_index;
 
     // highest_num_indices array stores all indices having biggest number of array
-    // indices of stor_big array which stores are from 0 to tmp-1
-    highest_num_indices = realloc(highest_num_indices, tmp * sizeof(int));
+    // indices of highest_num_indices which stores are from 0 to tmp-1
 
     // second_highest_index stores index of second highest_index number in an array
     int second_highest_index;
@@ -109,9 +108,6 @@ void split(int *arr, int size)
         var++;
         check++;
     }
-
-    // free allocated space
-    free(highest_num_indices);
 
     // printing resultant array
     for (i = 0; i < size + tmp; i++)
